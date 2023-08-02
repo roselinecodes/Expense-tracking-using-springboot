@@ -60,12 +60,9 @@ public class MessageParsingService {
                 LocalTime localTime = LocalTime.parse(time, inputFormatter);
                 String isoTime = localTime.format(outputFormatter);
 
-                //TODO create custom exception for situations to be faced
                 User user  = userRepository.findById(userId).orElseThrow(()->new RuntimeException("The user is not Found"));
 
                 TransactionDetails transactionDetails = new TransactionDetails(amount, recipientName, date, isoTime,user);
-
-
 
                 // Save the parsed transaction details to the database
                 TransactionDetails savedTransactionDetails = transactionDetailsRepository.save(transactionDetails);
